@@ -34,8 +34,10 @@ void config_get_defaults(color_config_t *config)
     if (!config) return;
 
     // Red HSV thresholds (simplified 0-255 scale)
-    // Note: Red hue wraps around at 0/255. For simplicity, using lower range only.
-    // To detect both ranges, adjust h_min=240, h_max=10 for wraparound detection.
+    // Default uses lower hue range (0-10) for simplicity.
+    // Red color can also appear in upper range (240-255 in standard HSV).
+    // For full wraparound detection, users can configure h_min=240, h_max=10 via web UI.
+    // The detection algorithm supports wraparound when h_min > h_max.
     config->red.h_min = 0;
     config->red.h_max = 10;
     config->red.s_min = 100;

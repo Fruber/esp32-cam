@@ -195,46 +195,46 @@ static esp_err_t config_post_handler(httpd_req_t *req)
     config_get_defaults(&config);
 
     cJSON *red = cJSON_GetObjectItem(root, "red");
-    if (red) {
+    if (red && cJSON_IsObject(red)) {
         cJSON *item;
-        if ((item = cJSON_GetObjectItem(red, "h_min"))) config.red.h_min = item->valueint;
-        if ((item = cJSON_GetObjectItem(red, "h_max"))) config.red.h_max = item->valueint;
-        if ((item = cJSON_GetObjectItem(red, "s_min"))) config.red.s_min = item->valueint;
-        if ((item = cJSON_GetObjectItem(red, "s_max"))) config.red.s_max = item->valueint;
-        if ((item = cJSON_GetObjectItem(red, "v_min"))) config.red.v_min = item->valueint;
-        if ((item = cJSON_GetObjectItem(red, "v_max"))) config.red.v_max = item->valueint;
+        if ((item = cJSON_GetObjectItem(red, "h_min")) && cJSON_IsNumber(item)) config.red.h_min = item->valueint;
+        if ((item = cJSON_GetObjectItem(red, "h_max")) && cJSON_IsNumber(item)) config.red.h_max = item->valueint;
+        if ((item = cJSON_GetObjectItem(red, "s_min")) && cJSON_IsNumber(item)) config.red.s_min = item->valueint;
+        if ((item = cJSON_GetObjectItem(red, "s_max")) && cJSON_IsNumber(item)) config.red.s_max = item->valueint;
+        if ((item = cJSON_GetObjectItem(red, "v_min")) && cJSON_IsNumber(item)) config.red.v_min = item->valueint;
+        if ((item = cJSON_GetObjectItem(red, "v_max")) && cJSON_IsNumber(item)) config.red.v_max = item->valueint;
     }
 
     cJSON *green = cJSON_GetObjectItem(root, "green");
-    if (green) {
+    if (green && cJSON_IsObject(green)) {
         cJSON *item;
-        if ((item = cJSON_GetObjectItem(green, "h_min"))) config.green.h_min = item->valueint;
-        if ((item = cJSON_GetObjectItem(green, "h_max"))) config.green.h_max = item->valueint;
-        if ((item = cJSON_GetObjectItem(green, "s_min"))) config.green.s_min = item->valueint;
-        if ((item = cJSON_GetObjectItem(green, "s_max"))) config.green.s_max = item->valueint;
-        if ((item = cJSON_GetObjectItem(green, "v_min"))) config.green.v_min = item->valueint;
-        if ((item = cJSON_GetObjectItem(green, "v_max"))) config.green.v_max = item->valueint;
+        if ((item = cJSON_GetObjectItem(green, "h_min")) && cJSON_IsNumber(item)) config.green.h_min = item->valueint;
+        if ((item = cJSON_GetObjectItem(green, "h_max")) && cJSON_IsNumber(item)) config.green.h_max = item->valueint;
+        if ((item = cJSON_GetObjectItem(green, "s_min")) && cJSON_IsNumber(item)) config.green.s_min = item->valueint;
+        if ((item = cJSON_GetObjectItem(green, "s_max")) && cJSON_IsNumber(item)) config.green.s_max = item->valueint;
+        if ((item = cJSON_GetObjectItem(green, "v_min")) && cJSON_IsNumber(item)) config.green.v_min = item->valueint;
+        if ((item = cJSON_GetObjectItem(green, "v_max")) && cJSON_IsNumber(item)) config.green.v_max = item->valueint;
     }
 
     cJSON *blue = cJSON_GetObjectItem(root, "blue");
-    if (blue) {
+    if (blue && cJSON_IsObject(blue)) {
         cJSON *item;
-        if ((item = cJSON_GetObjectItem(blue, "h_min"))) config.blue.h_min = item->valueint;
-        if ((item = cJSON_GetObjectItem(blue, "h_max"))) config.blue.h_max = item->valueint;
-        if ((item = cJSON_GetObjectItem(blue, "s_min"))) config.blue.s_min = item->valueint;
-        if ((item = cJSON_GetObjectItem(blue, "s_max"))) config.blue.s_max = item->valueint;
-        if ((item = cJSON_GetObjectItem(blue, "v_min"))) config.blue.v_min = item->valueint;
-        if ((item = cJSON_GetObjectItem(blue, "v_max"))) config.blue.v_max = item->valueint;
+        if ((item = cJSON_GetObjectItem(blue, "h_min")) && cJSON_IsNumber(item)) config.blue.h_min = item->valueint;
+        if ((item = cJSON_GetObjectItem(blue, "h_max")) && cJSON_IsNumber(item)) config.blue.h_max = item->valueint;
+        if ((item = cJSON_GetObjectItem(blue, "s_min")) && cJSON_IsNumber(item)) config.blue.s_min = item->valueint;
+        if ((item = cJSON_GetObjectItem(blue, "s_max")) && cJSON_IsNumber(item)) config.blue.s_max = item->valueint;
+        if ((item = cJSON_GetObjectItem(blue, "v_min")) && cJSON_IsNumber(item)) config.blue.v_min = item->valueint;
+        if ((item = cJSON_GetObjectItem(blue, "v_max")) && cJSON_IsNumber(item)) config.blue.v_max = item->valueint;
     }
 
     cJSON *min_area = cJSON_GetObjectItem(root, "min_area");
-    if (min_area) config.min_area = min_area->valueint;
+    if (min_area && cJSON_IsNumber(min_area)) config.min_area = min_area->valueint;
 
     cJSON *min_confidence = cJSON_GetObjectItem(root, "min_confidence");
-    if (min_confidence) config.min_confidence = min_confidence->valueint;
+    if (min_confidence && cJSON_IsNumber(min_confidence)) config.min_confidence = min_confidence->valueint;
 
     cJSON *frame_decimation = cJSON_GetObjectItem(root, "frame_decimation");
-    if (frame_decimation) config.frame_decimation = frame_decimation->valueint;
+    if (frame_decimation && cJSON_IsNumber(frame_decimation)) config.frame_decimation = frame_decimation->valueint;
 
     cJSON_Delete(root);
 
