@@ -16,6 +16,9 @@
 #include "cJSON.h"
 #include <string.h>
 
+// Forward declaration (provided by esp32-camera component)
+bool frame2jpg(camera_fb_t *fb, uint8_t quality, uint8_t **out, size_t *out_len);
+
 static const char *TAG = "http_server";
 static httpd_handle_t server = NULL;
 
@@ -193,32 +196,35 @@ static esp_err_t config_post_handler(httpd_req_t *req)
 
     cJSON *red = cJSON_GetObjectItem(root, "red");
     if (red) {
-        config.red.h_min = cJSON_GetObjectItem(red, "h_min")->valueint;
-        config.red.h_max = cJSON_GetObjectItem(red, "h_max")->valueint;
-        config.red.s_min = cJSON_GetObjectItem(red, "s_min")->valueint;
-        config.red.s_max = cJSON_GetObjectItem(red, "s_max")->valueint;
-        config.red.v_min = cJSON_GetObjectItem(red, "v_min")->valueint;
-        config.red.v_max = cJSON_GetObjectItem(red, "v_max")->valueint;
+        cJSON *item;
+        if ((item = cJSON_GetObjectItem(red, "h_min"))) config.red.h_min = item->valueint;
+        if ((item = cJSON_GetObjectItem(red, "h_max"))) config.red.h_max = item->valueint;
+        if ((item = cJSON_GetObjectItem(red, "s_min"))) config.red.s_min = item->valueint;
+        if ((item = cJSON_GetObjectItem(red, "s_max"))) config.red.s_max = item->valueint;
+        if ((item = cJSON_GetObjectItem(red, "v_min"))) config.red.v_min = item->valueint;
+        if ((item = cJSON_GetObjectItem(red, "v_max"))) config.red.v_max = item->valueint;
     }
 
     cJSON *green = cJSON_GetObjectItem(root, "green");
     if (green) {
-        config.green.h_min = cJSON_GetObjectItem(green, "h_min")->valueint;
-        config.green.h_max = cJSON_GetObjectItem(green, "h_max")->valueint;
-        config.green.s_min = cJSON_GetObjectItem(green, "s_min")->valueint;
-        config.green.s_max = cJSON_GetObjectItem(green, "s_max")->valueint;
-        config.green.v_min = cJSON_GetObjectItem(green, "v_min")->valueint;
-        config.green.v_max = cJSON_GetObjectItem(green, "v_max")->valueint;
+        cJSON *item;
+        if ((item = cJSON_GetObjectItem(green, "h_min"))) config.green.h_min = item->valueint;
+        if ((item = cJSON_GetObjectItem(green, "h_max"))) config.green.h_max = item->valueint;
+        if ((item = cJSON_GetObjectItem(green, "s_min"))) config.green.s_min = item->valueint;
+        if ((item = cJSON_GetObjectItem(green, "s_max"))) config.green.s_max = item->valueint;
+        if ((item = cJSON_GetObjectItem(green, "v_min"))) config.green.v_min = item->valueint;
+        if ((item = cJSON_GetObjectItem(green, "v_max"))) config.green.v_max = item->valueint;
     }
 
     cJSON *blue = cJSON_GetObjectItem(root, "blue");
     if (blue) {
-        config.blue.h_min = cJSON_GetObjectItem(blue, "h_min")->valueint;
-        config.blue.h_max = cJSON_GetObjectItem(blue, "h_max")->valueint;
-        config.blue.s_min = cJSON_GetObjectItem(blue, "s_min")->valueint;
-        config.blue.s_max = cJSON_GetObjectItem(blue, "s_max")->valueint;
-        config.blue.v_min = cJSON_GetObjectItem(blue, "v_min")->valueint;
-        config.blue.v_max = cJSON_GetObjectItem(blue, "v_max")->valueint;
+        cJSON *item;
+        if ((item = cJSON_GetObjectItem(blue, "h_min"))) config.blue.h_min = item->valueint;
+        if ((item = cJSON_GetObjectItem(blue, "h_max"))) config.blue.h_max = item->valueint;
+        if ((item = cJSON_GetObjectItem(blue, "s_min"))) config.blue.s_min = item->valueint;
+        if ((item = cJSON_GetObjectItem(blue, "s_max"))) config.blue.s_max = item->valueint;
+        if ((item = cJSON_GetObjectItem(blue, "v_min"))) config.blue.v_min = item->valueint;
+        if ((item = cJSON_GetObjectItem(blue, "v_max"))) config.blue.v_max = item->valueint;
     }
 
     cJSON *min_area = cJSON_GetObjectItem(root, "min_area");
