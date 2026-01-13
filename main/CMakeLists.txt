@@ -1,0 +1,19 @@
+idf_component_register(
+    SRCS 
+        "app_main.c"
+        "camera_driver.c"
+        "color_detect.c"
+        "config_store.c"
+        "http_server.c"
+        "ws2812_led.c"
+    INCLUDE_DIRS "."
+    REQUIRES 
+        nvs_flash
+        esp_http_server
+        esp_wifi
+        esp_netif
+        esp_event
+        wifi_provisioning
+        protocomm
+        mdns
+)
